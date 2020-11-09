@@ -10,8 +10,11 @@ public class User {
     @PrimaryKey(autoGenerate = true)
     public long userID;
 
-    @ColumnInfo(name = "name")
-    public String name;
+    @ColumnInfo(name = "firstName")
+    public String firstName;
+
+    @ColumnInfo(name = "lastName")
+    public String lastName;
 
     @ColumnInfo(name = "email")
     public String email;

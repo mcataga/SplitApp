@@ -33,6 +33,13 @@ public class UserActivity extends AppCompatActivity {
         AppDatabase db = AppDatabase.getDbInstance(this.getApplicationContext());
 
         User user = new User();
-        
+        user.firstName = first;
+        user.lastName = last;
+        user.email = email;
+        user.password = pass;
+
+        db.userDao().insertUser(user);
+
+        finish();
     }
 }
