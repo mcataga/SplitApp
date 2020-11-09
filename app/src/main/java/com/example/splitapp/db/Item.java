@@ -9,6 +9,7 @@ import androidx.room.PrimaryKey;
 public class Item {
     @PrimaryKey(autoGenerate = true)
     public long itemID;
+    public long billID;
     @ColumnInfo(name = "name")
     public String name;
     @ColumnInfo(name = "cost")

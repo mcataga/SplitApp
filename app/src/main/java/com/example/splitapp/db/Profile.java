@@ -9,6 +9,7 @@ public class Profile {
 
     @PrimaryKey(autoGenerate = true)
     public long profileID;
+    public long activityID;
     @ColumnInfo(name = "name")
     public String name;
     @ColumnInfo(name = "phoneNumber")
