@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Bill {
     @PrimaryKey(autoGenerate = true)
-    public int billID;
+    public long billID;
 
     @ColumnInfo(name = "name")
     public String name;

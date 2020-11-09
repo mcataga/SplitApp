@@ -8,8 +8,8 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Split {
     @PrimaryKey(autoGenerate = true)
-    public int activityID;
-
+    public long splitID;
+    public long itemID;
     @ColumnInfo(name = "custom_amount")
     public double customAmount;
     @ColumnInfo(name = "remaining_cost")

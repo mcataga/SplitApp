@@ -8,7 +8,8 @@ import androidx.room.PrimaryKey;
 @Entity
 public class Activity {
     @PrimaryKey(autoGenerate = true)
-    public int activityID;
+    public long activityID;
+    public long userID;
 
     @ColumnInfo(name = "name")
     public String name;

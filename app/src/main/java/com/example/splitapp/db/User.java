@@ -8,7 +8,7 @@ import androidx.room.PrimaryKey;
 public class User {
 
     @PrimaryKey(autoGenerate = true)
-    public int userID;
+    public long userID;
 
     @ColumnInfo(name = "name")
     public String name;
