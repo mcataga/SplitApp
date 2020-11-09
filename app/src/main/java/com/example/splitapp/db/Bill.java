@@ -9,6 +9,7 @@ import androidx.room.PrimaryKey;
 public class Bill {
     @PrimaryKey(autoGenerate = true)
     public long billID;
+    public long activityID;
 
     @ColumnInfo(name = "name")
     public String name;
