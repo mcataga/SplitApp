@@ -1,6 +1,7 @@
 package com.example.splitapp;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -25,6 +26,7 @@ public class UserActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveUser(firstname.getText().toString(), lastname.getText().toString(), email.getText().toString(), password.getText().toString());
+                Log.d("UserActivity", "DEBUG DEBUG HELLO");
             }
         });
     }
