@@ -5,18 +5,18 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class User {
+public class Profile {
 
     @PrimaryKey(autoGenerate = true)
-    public int userID;
-
+    public int profileID;
     @ColumnInfo(name = "name")
     public String name;
-
+    @ColumnInfo(name = "phoneNumber")
+    public long phoneNumber;
     @ColumnInfo(name = "email")
-    public String email;
+    public String emailAddress;
+    @ColumnInfo(name = "address")
+    public String address;
 
-    @ColumnInfo(name = "password")
-    public String password;
 
 }
