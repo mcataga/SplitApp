@@ -81,7 +81,7 @@ public class Login extends Fragment {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
                     Log.d(TAG, "User has successfully logged in");
-                    Intent intent = new Intent(getActivity(), UserActivities.class);
+                    Intent intent = new Intent(getActivity(), UserActivityListActivity.class);
                     startActivity(intent);
                 }
                 else {

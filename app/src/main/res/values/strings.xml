@@ -19,4 +19,12 @@
     <string name="login_with_an_existing_account">Login with an existing account</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="title_useractivity_list">Items</string>
+    <string name="title_useractivity_detail">UserActivity Detail</string>
+    <string name="create_new_activity">Create New Activity</string>
+    <string name="activity_name">Activity Name</string>
+    <string name="todo">TODO</string>
+    <string name="delete">Delete</string>
 </resources>
