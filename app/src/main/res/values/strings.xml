@@ -15,4 +15,8 @@
     <string name="email_address">Email Address</string>
     <string name="password">Password</string>
     <string name="save">Save</string>
+    <string name="register_a_new_account">Register a new account</string>
+    <string name="login_with_an_existing_account">Login with an existing account</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
 </resources>

@@ -14,14 +14,14 @@ import com.example.splitapp.db.User;
 public class UserActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedState){
         super.onCreate(savedState);
-        setContentView(R.layout.fragment_first);
+        setContentView(R.layout.login_activity);
 
-        final EditText firstname = findViewById(R.id.firstName);
-        final EditText lastname = findViewById(R.id.lastName);
-        final EditText email = findViewById(R.id.emailAddress);
-        final EditText password = findViewById(R.id.passwordField);
+        final EditText firstname = findViewById(R.id.registerFirstName);
+        final EditText lastname = findViewById(R.id.registerLastName);
+        final EditText email = findViewById(R.id.registerEmailAddress);
+        final EditText password = findViewById(R.id.registerPassword);
 
-        Button save = findViewById(R.id.btnSave);
+        Button save = findViewById(R.id.btnLoginActivity);
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
