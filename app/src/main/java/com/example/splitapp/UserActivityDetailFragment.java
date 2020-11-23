@@ -16,11 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.splitapp.dummy.ActivityContent;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
 
 /**
  * A fragment representing a single UserActivity detail screen.
@@ -34,11 +37,13 @@ public class UserActivityDetailFragment extends Fragment {
      * represents.
      */
     public static final String ARG_ITEM_ID = "item_id";
+    public static final String ARG_ITEM_NAME = "item_name";
 
     /**
      * The dummy content this fragment is presenting.
      */
     private ActivityContent.ActivityItem mItem;
+    private HashMap<String, ActivityContent.ActivityItem> ITEM_MAP;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -47,6 +52,7 @@ public class UserActivityDetailFragment extends Fragment {
     private FirebaseFirestore fStore;
     private FirebaseAuth fAuth;
     private String TAG = "UserActivityFragment";
+    private EditText activityName;
     public UserActivityDetailFragment() {
     }
 
@@ -55,20 +61,7 @@ public class UserActivityDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         fStore = FirebaseFirestore.getInstance();
         fAuth = FirebaseAuth.getInstance();
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
-            // to load content from a content provider.
-            mItem = ActivityContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
-
-            Activity activity = this.getActivity();
-            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
-            if (appBarLayout != null) {
-                appBarLayout.setTitle(mItem.name);
-            }
-        }
-        EditText activityName = getActivity().findViewById(R.id.editActivityName);
-        activityName.setText(mItem.name);
+        activityName = getActivity().findViewById(R.id.editActivityName);
         getActivity().findViewById(R.id.btnDelete).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,13 +101,35 @@ public class UserActivityDetailFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        Bundle savedInstanceState = this.getArguments();
+        Toast.makeText(getContext(), "THIS IS MAP FRAG" + ITEM_MAP.size(), Toast.LENGTH_LONG).show();
+            ITEM_MAP = (HashMap<String, ActivityContent.ActivityItem>) savedInstanceState.getSerializable("ITEM_MAP");
+            Toast.makeText(getContext(), "THIS IS MAP FRAG" + ITEM_MAP.toString(), Toast.LENGTH_LONG).show();
+            Log.d(TAG, "TESTTEST");
+        if (getArguments().containsKey(ARG_ITEM_ID)) {
+            Toast.makeText(getContext(), "THIS IS ID FRAG" + getArguments().getString(ARG_ITEM_ID), Toast.LENGTH_LONG).show();
+            mItem = ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            Toast.makeText(getContext(), mItem.toString(), Toast.LENGTH_LONG).show();
+            Activity activity = this.getActivity();
+            CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+            if (appBarLayout != null) {
+                appBarLayout.setTitle(mItem.name);
+            }
+            activityName.setText(mItem.name);
+        }
+
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.useractivity_detail, container, false);
 
         // Show the dummy content as text in a TextView.
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.useractivity_detail)).setText(mItem.details);
+            ((TextView) rootView.findViewById(R.id.useractivity_detail)).setText("FILLER TEXT 1");
         }
 
         return rootView;
