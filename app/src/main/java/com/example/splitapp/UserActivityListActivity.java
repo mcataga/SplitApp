@@ -84,7 +84,6 @@ public class UserActivityListActivity extends AppCompatActivity {
 
         assert recyclerView != null;
         recyclerView = findViewById(R.id.useractivity_list);
-        setupRecyclerView(recyclerView);
     }
 
     @Override
@@ -119,19 +118,14 @@ public class UserActivityListActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        setupRecyclerView(recyclerView);
-
-
-    }
-
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
         adapter = new SimpleItemRecyclerViewAdapter(this, ITEMS, mTwoPane);
         recyclerView.setAdapter(adapter);
 
+
     }
+
     public class SimpleItemRecyclerViewAdapter
             extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
-
         private final UserActivityListActivity mParentActivity;
         private final List<ActivityContent.ActivityItem> mValues;
         private final boolean mTwoPane;
@@ -153,7 +147,6 @@ public class UserActivityListActivity extends AppCompatActivity {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, UserActivityDetailActivity.class);
                     intent.putExtra(UserActivityDetailFragment.ARG_ITEM_ID, item.id);
-
                     context.startActivity(intent);
                 }
             }
