@@ -89,7 +89,6 @@ public class UserActivityListActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Toast.makeText(this, "Error filling lists from db!", Toast.LENGTH_LONG).show();
             FirebaseFirestore fStore = FirebaseFirestore.getInstance();
             FirebaseAuth fAuth = FirebaseAuth.getInstance();
             ITEMS.clear();
@@ -120,8 +119,6 @@ public class UserActivityListActivity extends AppCompatActivity {
         }
         adapter = new SimpleItemRecyclerViewAdapter(this, ITEMS, mTwoPane);
         recyclerView.setAdapter(adapter);
-
-
     }
 
     public class SimpleItemRecyclerViewAdapter
@@ -133,6 +130,7 @@ public class UserActivityListActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 ActivityContent.ActivityItem item = (ActivityContent.ActivityItem) view.getTag();
+                Toast.makeText(getApplicationContext(), "TO THE FRAGMENT WE GO", Toast.LENGTH_LONG).show();
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
                     arguments.putString(UserActivityDetailFragment.ARG_ITEM_ID, item.id);
@@ -147,6 +145,8 @@ public class UserActivityListActivity extends AppCompatActivity {
                     Context context = view.getContext();
                     Intent intent = new Intent(context, UserActivityDetailActivity.class);
                     intent.putExtra(UserActivityDetailFragment.ARG_ITEM_ID, item.id);
+                    intent.putExtra(UserActivityDetailFragment.ARG_ITEM_NAME, item.name);
+                    intent.putExtra("ITEM_MAP",ITEM_MAP);
                     context.startActivity(intent);
                 }
             }

@@ -12,6 +12,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,7 +28,7 @@ public class ActivityContent {
     public static String TAG = "ActivityContent";
 
 
-    public static class ActivityItem {
+    public static class ActivityItem implements Serializable {
         public final String id;
         public final String name;
 
