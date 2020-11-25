@@ -27,6 +27,8 @@ public class BillView extends AppCompatActivity {
     private String billName;
     private String billId;
     private String activityId;
+    private String price;
+    private String imageId;
     private EditText totalPrice;
     private StorageReference imgref;
     private FirebaseFirestore fStore = FirebaseFirestore.getInstance();
@@ -49,40 +51,36 @@ public class BillView extends AppCompatActivity {
         billName = intent.getStringExtra("name");
         Log.d(TAG, intent.getStringExtra("name"));
         billId = intent.getStringExtra("billId");
-        activityId = intent.getStringExtra("activityId");
+        Log.d(TAG, "bill" + billId);
+        activityId = intent.getStringExtra("docId");
+        Log.d(TAG, "activity" + activityId);
         billRef = fStore.collection("users").document(fAuth.getCurrentUser().getUid()).collection("activities").document(activityId).collection("bills").document(billId);
+        Log.d(TAG, billRef.getPath());
         billRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
-                    billItem = task.getResult();
-                    if (billItem.exists()) {
-                        Log.d(TAG, "DocumentSnapshot data: " + billItem.getData());
-                    } else {
-                        Log.d(TAG, "No such document");
-                    }
+                      task.getResult();
+                      price= String.valueOf(task.getResult().getData().get("totalPrice"));
+                      imageId= (String)task.getResult().getData().get("imageId");
+                    totalPrice.setText(price);
+                    imgref = imgdb.getReference().child("images/" + imageId);
+                    imgref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            Picasso.get().load(uri.toString()).into(imageHolder);
+                        }
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+
                 }
                 else {
                     Log.d(TAG, "get failed with ", task.getException());
                 }
-            }
-        });
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        totalPrice.setText(billItem.getString("totalPrice"));
-        imgref = imgdb.getReference().child("images/" + billItem.getString("ImageId"));
-        imgref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri.toString()).into(imageHolder);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-
             }
         });
     }

@@ -61,8 +61,9 @@ public class ActivityDetails extends AppCompatActivity {
             public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
                 Intent intent = new Intent(ActivityDetails.this, BillView.class);
                 intent.putExtra("billId", documentSnapshot.getId());
+                Log.d(TAG, "docID" + activityId);
                 intent.putExtra("docId", activityId);
-                intent.putExtra("amountOwed", documentSnapshot.getString("totalPrice"));
+                intent.putExtra("amountOwed", documentSnapshot.getDouble("totalPrice"));
                 intent.putExtra("name", documentSnapshot.getString("name"));
                 Log.d(TAG, "GOING TO BILLS YEEHAW");
                 startActivity(intent);

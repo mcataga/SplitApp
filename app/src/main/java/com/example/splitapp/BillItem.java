@@ -25,7 +25,7 @@ public class BillItem {
     public void setName(String name) { this.mName = name; }
     public String getId() { return mId; }
     public void setId(String id) { this.mId = id; }
-    public String getTotalPrice() { return String.valueOf(mTotalPrice); }
+    public double getTotalPrice() { return mTotalPrice; }
     public void setImageId(String imageId) {this.imageId=imageId;}
     public String getImageId() {return imageId;}
     public void setTotalPrice(double totalPrice) { this.mTotalPrice = totalPrice; }
