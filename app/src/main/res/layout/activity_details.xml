@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ActivityDetails">
+
+    <TextView
+        android:id="@+id/activityDetailsName"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center"
+        android:text="@string/activity_name"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/activityDetailBtnProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="50dp"
+        android:text="@string/add_new_profile" />
+
+    <Button
+        android:id="@+id/activityDetailBtnBill"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:text="@string/add_edit_new_bill" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/billRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="460dp"
+        android:layout_marginTop="25dp" />
+
+</LinearLayout>

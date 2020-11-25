@@ -24,7 +24,6 @@
     <string name="title_useractivity_list">Items</string>
     <string name="title_useractivity_detail">UserActivity Detail</string>
     <string name="create_new_activity">Create New Activity</string>
-    <string name="activity_name">Activity Name</string>
     <string name="todo">TODO</string>
     <string name="delete">Delete</string>
     <string name="title_activity_manage_bill">manage_bill</string>
@@ -33,7 +32,6 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
-    <string name="bill_name">Bill Name</string>
     <string name="amount_paid">Amount Paid</string>
     <string name="add_manage_profile">Add/Manage Profile</string>
     <string name="add_picture">Add Picture</string>
@@ -43,4 +41,10 @@
     <string name="miscellaneous_notes">Miscellaneous Notes</string>
     <string name="amount_owed">Amount Owed</string>
     <string name="add_new_profile">Add New Profile</string>
+    <string name="activity_name">Activity Name</string>
+    <string name="add_edit_new_bill">Add/Edit New Bill</string>
+    <string name="activityitem_place_holder">ActivityItem Place Holder</string>
+    <string name="bill_name">Bill Name</string>
+    <string name="bill_price">Bill Price</string>
+    <string name="bill_uploaded_by_user">bill uploaded by user</string>
 </resources>

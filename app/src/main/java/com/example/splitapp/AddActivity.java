@@ -6,10 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.splitapp.dummy.ActivityContent;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -19,7 +17,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class AddActivity extends AppCompatActivity {
     private FirebaseFirestore fStore;
@@ -56,5 +53,9 @@ public class AddActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+    public void onBackPressed() {
+        finish();
+        super.onBackPressed();
     }
 }

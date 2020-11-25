@@ -18,15 +18,21 @@
         android:inputType="textPersonName"
         android:importantForAutofill="no" />
 
+    <ImageView
+        android:id="@+id/billPicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:srcCompat="@tools:sample/avatars" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerBills"
         android:layout_width="312dp"
-        android:layout_height="428dp"
+        android:layout_height="277dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp" />
 
     <Button
-        android:id="@+id/btnSaveBill"
+        android:id="@+id/btnSaveExistingBill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
