@@ -27,4 +27,20 @@
     <string name="activity_name">Activity Name</string>
     <string name="todo">TODO</string>
     <string name="delete">Delete</string>
+    <string name="title_activity_manage_bill">manage_bill</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="bill_name">Bill Name</string>
+    <string name="amount_paid">Amount Paid</string>
+    <string name="add_manage_profile">Add/Manage Profile</string>
+    <string name="add_picture">Add Picture</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="address">Address</string>
+    <string name="miscellaneous_notes">Miscellaneous Notes</string>
+    <string name="amount_owed">Amount Owed</string>
+    <string name="add_new_profile">Add New Profile</string>
 </resources>
