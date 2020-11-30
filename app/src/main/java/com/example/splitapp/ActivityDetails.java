@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -78,7 +77,7 @@ public class ActivityDetails extends AppCompatActivity {
 
         adapter = new BillViewAdapter(items);
 
-        RecyclerView recyclerView = findViewById(R.id.billRecyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerItems);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager((new LinearLayoutManager(this)));
         recyclerView.setAdapter(adapter);

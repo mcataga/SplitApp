@@ -40,7 +40,7 @@ public class ManageBill extends AppCompatActivity {
     FirebaseAuth fAuth;
     EditText billName;
     EditText billPrice;
-    ImageView imageHolder;
+//    ImageView imageHolder;
     String activityId;
     public Uri imageUri;
     String imageId;
@@ -56,7 +56,7 @@ public class ManageBill extends AppCompatActivity {
         ref = imgdb.getReference();
         billName = (EditText)findViewById(R.id.editBillName);
         billPrice = (EditText)findViewById(R.id.editAmountPaid);
-        imageHolder = (ImageView)findViewById(R.id.uploadedBill);
+//        imageHolder = (ImageView)findViewById(R.id.uploadedBill);
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         String userID = fAuth.getCurrentUser().getUid();
@@ -90,7 +90,7 @@ public class ManageBill extends AppCompatActivity {
         if (requestCode == 1 && resultCode == RESULT_OK && data !=null && data.getData()!=null) {
             imageId = UUID.randomUUID().toString();
             imageUri = data.getData();
-            Picasso.get().load(imageUri).into(imageHolder);
+//            Picasso.get().load(imageUri).into(imageHolder);
             Toast.makeText(this, "Image uploaded successfully", Toast.LENGTH_SHORT).show();
         }
     }
@@ -108,21 +108,23 @@ public class ManageBill extends AppCompatActivity {
             billPrice.requestFocus();
             return;
         }
-        if (imageId.isEmpty()) {
-            imageId = "no image";
+        if (imageId == null) {
+            imageId = "";
         }
-        double totalAmount = Double.parseDouble(temp);
+        double totalPaid = Double.parseDouble(temp);
         Map<String, Object> bill = new HashMap<>();
         bill.put("name", name);
-        bill.put("totalPrice", totalAmount);
+        bill.put("amountPaid", totalPaid);
         bill.put("imageId", imageId);
-        uploadFile();
+        if(!imageId.isEmpty()) uploadFile();
         collectionReference.add(bill).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override
             public void onComplete(@NonNull Task<DocumentReference> task) {
                 if (task.isSuccessful()) {
-                    Log.d(TAG, "Successfully created new bill");
+                    bill.put("id", task.getResult().getId());
+                    task.getResult().set(bill);
                     finish();
+                    Log.d(TAG, "Successfully created new bill");
                 }
                 else {
                     Log.d(TAG, "Creating new bill failed");

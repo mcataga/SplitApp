@@ -37,9 +37,9 @@
         android:text="@string/add_edit_new_bill" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/billRecyclerView"
+        android:id="@+id/recyclerItems"
         android:layout_width="match_parent"
-        android:layout_height="460dp"
+        android:layout_height="387dp"
         android:layout_marginTop="25dp" />
 
 </LinearLayout>

@@ -8,34 +8,68 @@
     tools:context=".BillView">
 
     <EditText
-        android:id="@+id/editAmountOwed"
+        android:id="@+id/editNameBill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="@string/amount_owed"
-        android:inputType="textPersonName"
-        android:importantForAutofill="no" />
+        android:hint="@string/bill_name"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName" />
 
-    <ImageView
-        android:id="@+id/billPicture"
-        android:layout_width="match_parent"
+    <EditText
+        android:id="@+id/editTotalPaid"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        tools:srcCompat="@tools:sample/avatars" />
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:hint="@string/amount_paid"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/viewReceipt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/view_receipt" />
+
+    <Button
+        android:id="@+id/viewProfiles"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/view_profiles" />
+
+    <Button
+        android:id="@+id/btnNewItem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/new_item" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerBills"
-        android:layout_width="312dp"
-        android:layout_height="277dp"
+        android:id="@+id/recyclerItems2"
+        android:layout_width="412dp"
+        android:layout_height="308dp"
         android:layout_gravity="center"
         android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/totalPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/total_price_0_00"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/btnSaveExistingBill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="10dp"
         android:text="@string/save" />
 </LinearLayout>

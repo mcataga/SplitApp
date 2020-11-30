@@ -57,10 +57,15 @@ public class AddNewProfile extends AppCompatActivity {
                 profile.put("email", profileEmail);
                 profile.put("address", profileAddress);
                 profile.put("notes", profileNotes);
+                profile.put("totalSplit", 0);
+                profile.put("amountOwed", 0.0);
+                profile.put("isVisible", false);
                     collectionReference.add(profile).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
                         if (task.isSuccessful()) {
+                            profile.put("id", task.getResult().getId());
+                            task.getResult().set(profile);
                             Log.d(TAG, "Successfully created new profile");
                             finish();
                         }

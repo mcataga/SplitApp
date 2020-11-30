@@ -16,7 +16,7 @@ public class BillItem {
         this.mName = name;
         this.mTotalPrice = totalPrice;
         this.mAmountPaid = amountPaid;
-        this.mAmountPaid = amountOwed;
+        this.mAmountOwed = amountOwed;
     }
 
     public String getName() {

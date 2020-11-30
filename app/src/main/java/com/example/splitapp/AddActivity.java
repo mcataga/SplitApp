@@ -43,6 +43,8 @@ public class AddActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
                         if (task.isSuccessful()) {
+                            activity.put("id", task.getResult().getId());
+                            task.getResult().set(activity);
                             Log.d(TAG, "Successfully created new activity");
                             finish();
                         }

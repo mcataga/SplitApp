@@ -32,7 +32,6 @@
     values-round/strings.xml for round devices.
     -->
     <string name="hello_world">Hello Square World!</string>
-    <string name="amount_paid">Amount Paid</string>
     <string name="add_manage_profile">Add/Manage Profile</string>
     <string name="add_picture">Add Picture</string>
     <string name="name">Name</string>
@@ -47,4 +46,22 @@
     <string name="bill_name">Bill Name</string>
     <string name="bill_price">Bill Price</string>
     <string name="bill_uploaded_by_user">bill uploaded by user</string>
+    <string name="image_of_the_bill">image of the bill</string>
+    <string name="view_receipt">View Receipt</string>
+    <string name="new_item">New Item</string>
+    <string name="view_profiles">View Profiles</string>
+    <string name="total_price_0_00">Total Price: $0.00</string>
+    <string name="add_picture_of_receipt">Add picture of Receipt</string>
+    <string name="add_profile">Add Profile</string>
+    <string name="amount_paid">Amount Paid</string>
+    <string name="item_name">Item Name</string>
+    <string name="item_price">Item Price</string>
+    <string name="split_by_1">Split by: 1</string>
+    <string name="add_activity">Add activity</string>
+    <string name="receipt">Receipt</string>
+    <string name="image_of_receipt">image of receipt</string>
+    <string name="add_existing_profile">Add Existing Profile</string>
+    <string name="total_items_split">Total Items Split:</string>
+    <string name="profile_name">Profile Name</string>
+    <string name="profiles">Profiles</string>
 </resources>

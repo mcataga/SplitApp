@@ -14,8 +14,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ActivityDetails"
-            android:parentActivityName=".ActivityList" ></activity>
+        <activity android:name=".NewItem"></activity>
+        <activity android:name=".BillImage" />
+        <activity
+            android:name=".ActivityDetails"
+            android:parentActivityName=".ActivityList" />
         <activity android:name=".ActivityList" />
         <activity android:name=".AddProfileToBill" />
         <activity android:name=".BillView" />

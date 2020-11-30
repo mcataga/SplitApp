@@ -18,8 +18,10 @@
         android:id="@+id/addActivityItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="300dp"
-        android:layout_marginTop="600dp"
-        android:clickable="true" />
+        android:layout_marginStart="320dp"
+        android:layout_marginTop="640dp"
+        android:clickable="true"
+        android:contentDescription="@string/add_activity"
+        app:backgroundTint="#1C1A1A" />
 
 </RelativeLayout>
