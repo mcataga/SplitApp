@@ -140,11 +140,10 @@ public class NewItem extends AppCompatActivity {
             remainingValue+=(Double.parseDouble(temp)/divisor);
             profiles.document(item1.getId()).update("totalSplit", item1.getTotalSplit()+1);
         }
-        if (selectedItems.size() == 1) {
+        if (selectedItems.size() >= 1) {
             billRef.update("amountOwed", (amountOwed + remainingValue));
         }
-        else if(selectedItems.size() > 1)
-            billRef.update("amountOwed", (amountOwed + remainingValue/(divisor-1)));
+
 
         if(itemId == null) {
             collectionReference.add(item).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
