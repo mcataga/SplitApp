@@ -105,7 +105,7 @@ public class BillView extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 amountOwed = documentSnapshot.getDouble("amountOwed");
-                totalPaid.setText(format.format(amountOwed));
+                totalPaid.setText("Amount Owed: " + format.format(amountOwed));
                 totalPrice.setText(format.format((documentSnapshot.getDouble("totalPrice"))));
             }
         });
@@ -209,7 +209,7 @@ public class BillView extends AppCompatActivity {
                     billRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
                         @Override
                         public void onSuccess(DocumentSnapshot documentSnapshot) {
-                            totalPaid.setText(format.format(documentSnapshot.getDouble("amountOwed")));
+                            totalPaid.setText("Amount Owed: " +format.format(documentSnapshot.getDouble("amountOwed")));
                         }
                     });
                 }
