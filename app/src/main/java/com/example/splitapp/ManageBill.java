@@ -39,7 +39,6 @@ public class ManageBill extends AppCompatActivity {
     FirebaseFirestore fStore;
     FirebaseAuth fAuth;
     EditText billName;
-    EditText billPrice;
 //    ImageView imageHolder;
     String activityId;
     public Uri imageUri;
@@ -55,7 +54,6 @@ public class ManageBill extends AppCompatActivity {
         imgdb = FirebaseStorage.getInstance();
         ref = imgdb.getReference();
         billName = (EditText)findViewById(R.id.editBillName);
-        billPrice = (EditText)findViewById(R.id.editAmountPaid);
 //        imageHolder = (ImageView)findViewById(R.id.uploadedBill);
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -97,25 +95,20 @@ public class ManageBill extends AppCompatActivity {
 
     private void saveBill() {
         String name = billName.getText().toString().trim();
-        String temp = billPrice.getText().toString().trim();
         if (name.isEmpty()) {
             billName.setError("Bill Name is required");
             billName.requestFocus();
             return;
         }
-        if (temp.isEmpty()) {
-            billPrice.setError("Amount paid is required");
-            billPrice.requestFocus();
-            return;
-        }
+
         if (imageId == null) {
             imageId = "";
         }
-        double totalPaid = Double.parseDouble(temp);
         Map<String, Object> bill = new HashMap<>();
         bill.put("name", name);
-        bill.put("amountPaid", totalPaid);
+        bill.put("amountOwed", 0.0);
         bill.put("imageId", imageId);
+        bill.put("totalPrice", 0.0);
         if(!imageId.isEmpty()) uploadFile();
         collectionReference.add(bill).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
             @Override

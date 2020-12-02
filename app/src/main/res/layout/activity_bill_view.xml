@@ -18,16 +18,15 @@
         android:importantForAutofill="no"
         android:inputType="textPersonName" />
 
-    <EditText
+    <TextView
         android:id="@+id/editTotalPaid"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"
         android:ems="10"
-        android:hint="@string/amount_paid"
-        android:importantForAutofill="no"
-        android:inputType="textPersonName" />
+        android:text="TextView"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/viewReceipt"

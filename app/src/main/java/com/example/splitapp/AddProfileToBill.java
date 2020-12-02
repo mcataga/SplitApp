@@ -45,39 +45,39 @@ public class AddProfileToBill extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_profile_to_bill);
         Intent intent = getIntent();
-        billId = intent.getStringExtra("billId");
+//        billId = intent.getStringExtra("billId");
         activityId = intent.getStringExtra("activityId");
         profiles = fStore.collection("users").document(fAuth.getCurrentUser().getUid()).collection("activities").document(activityId).collection("profiles");
-        bills = fStore.collection("users").document(fAuth.getCurrentUser().getUid()).collection("activities").document(activityId).collection("bills").document(billId);
-        items = fStore.collection("users").document(fAuth.getCurrentUser().getUid()).collection("activities").document(activityId).collection("bills").document(billId).collection("items");
-        items.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-             @Override
-             public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                 totalItems = queryDocumentSnapshots.size();
-             }
-         });
-        bills.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                totalPrice = documentSnapshot.getDouble("totalPrice");
-            }
-        });
-        profiles.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    profileSize = task.getResult().size();
-                    DocumentReference profile;
-                    for (QueryDocumentSnapshot documentSnapshot: task.getResult()) {
-                        profile = documentSnapshot.getReference();
-                        profile.update("totalSplit", totalItems);
-                        profile.update("amountOwed", totalPrice/(profileSize+1));
-                    }
-                }
-            }
-        });
+//        bills = fStore.collection("users").document(fAuth.getCurrentUser().getUid()).collection("activities").document(activityId).collection("bills").document(billId);
+//        items = fStore.collection("users").document(fAuth.getCurrentUser().getUid()).collection("activities").document(activityId).collection("bills").document(billId).collection("items");
+//
+//        items.get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+//            @Override
+//            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+//                totalItems = queryDocumentSnapshots.size();
+//            }
+//        });
+//        bills.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+//            @Override
+//            public void onSuccess(DocumentSnapshot documentSnapshot) {
+//                totalPrice = documentSnapshot.getDouble("totalPrice");
+//            }
+//        });
+//        profiles.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+//            @Override
+//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+//                if (task.isSuccessful()) {
+//                    profileSize = task.getResult().size();
+//                    DocumentReference profile;
+//                    for (QueryDocumentSnapshot documentSnapshot: task.getResult()) {
+//                        profile = documentSnapshot.getReference();
+//                        profile.update("totalSplit", totalItems);
+//                        profile.update("amountOwed", totalPrice/(profileSize+1));
+//                    }
+//                }
+//            }
+//        });
         setUpRecyclerView();
-
     }
     private void setUpRecyclerView() {
         Query query = profiles;
@@ -92,6 +92,7 @@ public class AddProfileToBill extends AppCompatActivity {
         recyclerView.setLayoutManager((new LinearLayoutManager(this)));
 //        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(recyclerView);
         recyclerView.setAdapter(adapter);
+        recyclerView.setClickable(false);
     }
 
     @Override

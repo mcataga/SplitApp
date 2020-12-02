@@ -20,17 +20,6 @@
         android:hint="@string/bill_name"
         android:inputType="textPersonName" />
 
-    <EditText
-        android:id="@+id/editAmountPaid"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:autofillHints=""
-        android:ems="10"
-        android:hint="@string/amount_paid"
-        android:inputType="numberDecimal" />
-
     <Button
         android:id="@+id/btnAddPicture"
         android:layout_width="wrap_content"

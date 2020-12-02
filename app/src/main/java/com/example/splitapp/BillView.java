@@ -32,7 +32,9 @@ import com.google.firebase.firestore.SetOptions;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class BillView extends AppCompatActivity {
     private static final String TAG = "BillView";
@@ -41,17 +43,19 @@ public class BillView extends AppCompatActivity {
     private String activityId;
     private String price;
     private String imageId;
-    private EditText totalPaid;
+    private TextView totalPaid;
+    private double amountOwed;
     private EditText nameBill;
     private TextView totalPrice;
-    private StorageReference imgref;
     private FirebaseFirestore fStore = FirebaseFirestore.getInstance();
     private FirebaseAuth fAuth = FirebaseAuth.getInstance();
     private FirebaseStorage imgdb = FirebaseStorage.getInstance();
     private DocumentReference billRef;
     private CollectionReference items1;
     private ItemViewAdapter adapter;
-    private Uri imageUri;
+    public boolean onCreate;
+    Locale locale = new Locale("en", "US");
+    NumberFormat format = NumberFormat.getCurrencyInstance(locale);
     
 
 
@@ -61,8 +65,9 @@ public class BillView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bill_view);
         Intent intent = getIntent();
+        onCreate = true;
         nameBill = (EditText)findViewById(R.id.editNameBill);
-        totalPaid = (EditText)findViewById(R.id.editTotalPaid);
+        totalPaid = (TextView)findViewById(R.id.editTotalPaid);
         totalPrice = (TextView)findViewById(R.id.totalPrice);
         billName = intent.getStringExtra("name");
         billId = intent.getStringExtra("billId");
@@ -96,7 +101,27 @@ public class BillView extends AppCompatActivity {
                 viewProfileButton();
             }
         });
+        billRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                amountOwed = documentSnapshot.getDouble("amountOwed");
+                totalPaid.setText(format.format(amountOwed));
+                totalPrice.setText(format.format((documentSnapshot.getDouble("totalPrice"))));
+            }
+        });
         setUpRecyclerView();
+        adapter.setOnItemClickListener(new ItemViewAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(DocumentSnapshot documentSnapshot, int position) {
+                Intent intent = new Intent(BillView.this, NewItem.class);
+                intent.putExtra("billId", billId);
+                intent.putExtra("activityId", activityId);
+                intent.putExtra("name", documentSnapshot.getString("name"));
+                intent.putExtra("price", documentSnapshot.getDouble("price"));
+                intent.putExtra("id", documentSnapshot.getId());
+                startActivity(intent);
+            }
+        });
     }
 
     private void viewProfileButton() {
@@ -109,6 +134,7 @@ public class BillView extends AppCompatActivity {
     private void newItemButton() {
         Intent intent = new Intent(BillView.this, NewItem.class);
         intent.putExtra("billId", billId);
+        intent.putExtra("amountOwed", amountOwed);
         intent.putExtra("activityId", activityId);
         startActivity(intent);
     }
@@ -119,24 +145,8 @@ public class BillView extends AppCompatActivity {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if (task.isSuccessful()) {
                     task.getResult();
-                    price= String.valueOf(task.getResult().getData().get("amountPaid"));
                     imageId= (String)task.getResult().getData().get("imageId");
-                    totalPaid.setText(price);
                     nameBill.setText(billName);
-                    imgref = imgdb.getReference().child("images/" + imageId);
-                    imgref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                        @Override
-                        public void onSuccess(Uri uri) {
-                            imageUri = uri;
-                            Log.d(TAG, "Uri successfully saved: "+imageUri);
-                        }
-                    }).addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-
-                        }
-                    });
-
                 }
                 else {
                     Log.d(TAG, "get failed with ", task.getException());
@@ -148,9 +158,7 @@ public class BillView extends AppCompatActivity {
     private void saveButton() {
         HashMap<String, Object> billDetails = new HashMap<>();
         billDetails.put("name", nameBill.getText().toString().trim());
-        String temp = totalPaid.getText().toString().trim();
         billDetails.put("imageId", imageId);
-        billDetails.put("amountPaid", Double.parseDouble(temp));
         billRef.set(billDetails, SetOptions.merge());
         Toast.makeText(this, "Bill has successfully been updated", Toast.LENGTH_SHORT).show();
     }
@@ -173,7 +181,14 @@ public class BillView extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        if (!onCreate)
+        resetView();
+        onCreate = false;
+        adapter.startListening();
 
+    }
+
+    private void resetView() {
         items1.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
@@ -186,15 +201,20 @@ public class BillView extends AppCompatActivity {
                     billRef.update("totalPrice", total).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
-                            Toast.makeText(BillView.this, "Bill Total Updated", Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "Bill Total Updated");
+
                         }
                     });
-                    totalPrice.setText("Total Price: $"+String.format(String.valueOf(total)));
+                    totalPrice.setText("Total Price: "+format.format(total));
+                    billRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                        @Override
+                        public void onSuccess(DocumentSnapshot documentSnapshot) {
+                            totalPaid.setText(format.format(documentSnapshot.getDouble("amountOwed")));
+                        }
+                    });
                 }
             }
         });
-        adapter.startListening();
-
     }
 
     @Override
@@ -212,6 +232,7 @@ public class BillView extends AppCompatActivity {
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             adapter.deleteItem(viewHolder.getAdapterPosition());
             Toast.makeText(BillView.this, "Item has been deleted", Toast.LENGTH_SHORT).show();
+            resetView();
         }
     };
 }

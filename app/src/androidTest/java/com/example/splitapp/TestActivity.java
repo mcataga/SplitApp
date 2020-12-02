@@ -69,6 +69,11 @@ public class TestActivity {
         onView(withId(R.id.activityName)).perform(replaceText("Test Activity"));
         onView(withId(R.id.btnAddActivity)).check(matches(isDisplayed()));
         onView(withId(R.id.btnAddActivity)).perform(click());
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         onView(withId(R.id.recyclerActivityItem)).check(matches(isDisplayed()));
         onView(withId(R.id.recyclerActivityItem)).perform(click());
     }
@@ -88,9 +93,6 @@ public class TestActivity {
         onView(withId(R.id.editBillName)).check(matches(isDisplayed()));
         onView(withId(R.id.editBillName)).perform(click());
         onView(withId(R.id.editBillName)).perform(replaceText("Test Bill"));
-        onView(withId(R.id.editAmountPaid)).check(matches(isDisplayed()));
-        onView(withId(R.id.editAmountPaid)).perform(click());
-        onView(withId(R.id.editAmountPaid)).perform(replaceText("500.0"));
         Espresso.pressBack();
         onView(withId(R.id.btnSaveNewBill)).check(matches(isDisplayed()));
         onView(withId(R.id.btnSaveNewBill)).perform(click());

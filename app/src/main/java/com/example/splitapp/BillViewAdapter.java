@@ -14,6 +14,9 @@ import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.text.NumberFormat;
+import java.util.Locale;
+
 public class BillViewAdapter extends FirestoreRecyclerAdapter<BillItem, BillViewAdapter.ViewHolder> {
     private static final String TAG = "BillViewAdapter";
     private BillViewAdapter.OnBillClickListener listener;
@@ -27,7 +30,9 @@ public class BillViewAdapter extends FirestoreRecyclerAdapter<BillItem, BillView
     protected void onBindViewHolder(@NonNull BillViewAdapter.ViewHolder holder, int position, @NonNull BillItem billItem) {
         Log.d(TAG, "onBindViewHolder: called");
         holder.billItemName.setText(billItem.getName());
-        holder.billTotalAmount.setText("$"+String.format(String.valueOf(billItem.getTotalPrice())));
+        Locale locale = new Locale("en", "US");
+        NumberFormat format = NumberFormat.getCurrencyInstance(locale);
+        holder.billTotalAmount.setText(format.format(billItem.getTotalPrice()));
     }
 
     @NonNull
